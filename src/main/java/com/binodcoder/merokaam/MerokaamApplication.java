@@ -1,4 +1,4 @@
-package main.java.com.binodcoder.merokaam;
+package com.binodcoder.merokaam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
