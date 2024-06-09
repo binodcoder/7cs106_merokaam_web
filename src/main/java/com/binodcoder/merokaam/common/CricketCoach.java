@@ -1,4 +1,4 @@
-package com.binodcoder.util;
+package com.binodcoder.merokaam.common;
 import org.springframework.stereotype.Component;
 @Component
 public class CricketCoach implements Coach {
