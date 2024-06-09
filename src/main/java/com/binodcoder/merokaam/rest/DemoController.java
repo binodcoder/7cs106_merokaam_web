@@ -9,8 +9,12 @@ public class DemoController {
     //define a private field for the dependency
     private Coach myCoach;
     // define a constructor for dependency injection
+//    @Autowired
+//    public DemoController(@Qualifier("cricketCoach") Coach theCoach) {
+//        myCoach = theCoach;
+//    }
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach theCoach) {
+    public DemoController(Coach theCoach) {
         myCoach = theCoach;
     }
 
