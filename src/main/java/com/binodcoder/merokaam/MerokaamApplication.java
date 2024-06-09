@@ -3,7 +3,10 @@ package com.binodcoder.merokaam;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(
+		scanBasePackages = {"com.binodcoder.merokaam",
+		"com.binodcoder.util"}
+)
 public class MerokaamApplication {
 
 	public static void main(String[] args) {
