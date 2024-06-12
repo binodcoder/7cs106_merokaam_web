@@ -8,4 +8,8 @@ public interface StudentDAO {
     Student findById(Integer id);
 
     List<Student> findAll();
+
+    List<Student> findByFirstName(String theFirstName);
+
+    void update(Student theStudent);
 }

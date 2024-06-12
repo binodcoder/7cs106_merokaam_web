@@ -22,8 +22,36 @@ public class MerokaamApplication {
             //createStudent(studentDAO);
             //createMultipleStudents(studentDAO);
             //readStudent(studentDAO);
-            queryForStudents(studentDAO);
+            //queryForStudents(studentDAO);
+            //queryForStudentsByFirstName(studentDAO);
+            updateStudent(studentDAO);
         };
+    }
+    private void updateStudent(StudentDAO studentDAO) {
+        //retrieve student based on the id: primary key
+        int studentId=1;
+        System.out.println("Gettign student with id: "+studentId);
+        Student myStudent=studentDAO.findById(studentId);
+
+        //change first name to "Bire"
+        System.out.println("Updating student...");
+        myStudent.setFirstName("Bire");
+
+
+        // update the student
+        studentDAO.update(myStudent);
+
+        //display the updated student
+        System.out.println("updated student: "+myStudent);
+    }
+    private void queryForStudentsByFirstName(StudentDAO studentDAO) {
+        //get a list of a students
+        List<Student> theStudents=studentDAO.findByFirstName("Hari");
+
+        //display list of students
+        for(Student tempStudent: theStudents){
+            System.out.println(tempStudent);
+        }
     }
     private void queryForStudents(StudentDAO studentDAO) {
         //get a list of students
