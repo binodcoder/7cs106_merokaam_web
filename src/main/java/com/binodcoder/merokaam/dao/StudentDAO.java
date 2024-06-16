@@ -1,17 +1,17 @@
 package com.binodcoder.merokaam.dao;
-import com.binodcoder.merokaam.entity.Student;
+import com.binodcoder.merokaam.entity.StudentEntity;
 
 import java.util.List;
 public interface StudentDAO {
-    void save(Student theStudent);
+    void save(StudentEntity theStudent);
 
-    Student findById(Integer id);
+    StudentEntity findById(Integer id);
 
-    List<Student> findAll();
+    List<StudentEntity> findAll();
 
-    List<Student> findByFirstName(String theFirstName);
+    List<StudentEntity> findByFirstName(String theFirstName);
 
-    void update(Student theStudent);
+    void update(StudentEntity theStudent);
 
     void delete(Integer id);
 

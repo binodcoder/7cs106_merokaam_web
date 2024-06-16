@@ -2,7 +2,7 @@ package com.binodcoder.merokaam.entity;
 import jakarta.persistence.*;
 @Entity
 @Table(name="student")
-public class Student {
+public class StudentEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
@@ -18,10 +18,10 @@ public class Student {
     private String email;
 
     //define constructors
-    public Student(){
+    public StudentEntity(){
 
     }
-    public Student(String firstName, String lastName, String email) {
+    public StudentEntity(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

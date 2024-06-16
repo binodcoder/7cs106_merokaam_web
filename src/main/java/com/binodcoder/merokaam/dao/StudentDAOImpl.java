@@ -1,5 +1,5 @@
 package com.binodcoder.merokaam.dao;
-import com.binodcoder.merokaam.entity.Student;
+import com.binodcoder.merokaam.entity.StudentEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -20,25 +20,25 @@ public class StudentDAOImpl implements StudentDAO{
     //implement save method
     @Override
     @Transactional
-    public void save(Student theStudent) {
+    public void save(StudentEntity theStudent) {
         entityManager.persist(theStudent);
     }
     @Override
-    public Student findById(Integer id) {
-        return entityManager.find(Student.class, id);
+    public StudentEntity findById(Integer id) {
+        return entityManager.find(StudentEntity.class, id);
     }
     @Override
-    public List<Student> findAll() {
+    public List<StudentEntity> findAll() {
         //create query
-        TypedQuery<Student> theQuery=entityManager.createQuery("FROM Student", Student.class);
+        TypedQuery<StudentEntity> theQuery=entityManager.createQuery("FROM Student", StudentEntity.class);
 
         //return query results
         return theQuery.getResultList();
     }
     @Override
-    public List<Student> findByFirstName(String theFirstName) {
+    public List<StudentEntity> findByFirstName(String theFirstName) {
         //create query
-        TypedQuery<Student> theQuery=entityManager.createQuery("FROM Student WHERE firstName=:theData", Student.class);
+        TypedQuery<StudentEntity> theQuery=entityManager.createQuery("FROM Student WHERE firstName=:theData", StudentEntity.class);
 
         //set query parameters
         theQuery.setParameter("theData", theFirstName);
@@ -48,7 +48,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
     @Override
     @Transactional
-    public void update(Student theStudent) {
+    public void update(StudentEntity theStudent) {
         entityManager.merge(theStudent);
 
     }
@@ -56,7 +56,7 @@ public class StudentDAOImpl implements StudentDAO{
     @Transactional
     public void delete(Integer id) {
         //retrieve the student
-        Student theStudent=entityManager.find(Student.class, id);
+        StudentEntity theStudent=entityManager.find(StudentEntity.class, id);
 
         //delete the student
         entityManager.remove(theStudent);

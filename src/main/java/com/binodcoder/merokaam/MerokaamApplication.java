@@ -1,6 +1,6 @@
 package com.binodcoder.merokaam;
 import com.binodcoder.merokaam.dao.StudentDAO;
-import com.binodcoder.merokaam.entity.Student;
+import com.binodcoder.merokaam.entity.StudentEntity;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,7 +44,7 @@ public class MerokaamApplication {
         //retrieve student based on the id: primary key
         int studentId=1;
         System.out.println("Gettign student with id: "+studentId);
-        Student myStudent=studentDAO.findById(studentId);
+        StudentEntity myStudent=studentDAO.findById(studentId);
 
         //change first name to "Bire"
         System.out.println("Updating student...");
@@ -59,19 +59,19 @@ public class MerokaamApplication {
     }
     private void queryForStudentsByFirstName(StudentDAO studentDAO) {
         //get a list of a students
-        List<Student> theStudents=studentDAO.findByFirstName("Hari");
+        List<StudentEntity> theStudents=studentDAO.findByFirstName("Hari");
 
         //display list of students
-        for(Student tempStudent: theStudents){
+        for(StudentEntity tempStudent: theStudents){
             System.out.println(tempStudent);
         }
     }
     private void queryForStudents(StudentDAO studentDAO) {
         //get a list of students
-        List<Student> theStudents=studentDAO.findAll();
+        List<StudentEntity> theStudents=studentDAO.findAll();
 
         //display list of students
-        for(Student tempStudent:theStudents){
+        for(StudentEntity tempStudent:theStudents){
             System.out.println(tempStudent);
         }
 
@@ -80,15 +80,15 @@ public class MerokaamApplication {
     }
     private void readStudent(StudentDAO studentDAO) {
 
-        Student student = studentDAO.findById(1);
+        StudentEntity student = studentDAO.findById(1);
         System.out.println("Found the student: "+ student);
     }
     private void createMultipleStudents(StudentDAO studentDAO) {
         //create multiple students object
         System.out.println("Creating 3 student objects ...");
-        Student tempStudent1 = new Student("Binod", "Bhandari", "binodcoder@gmail.com");
-        Student tempStudent2 = new Student("Ram", "Bhandari", "ramcoder@gmail.com");
-        Student tempStudent3 = new Student("Hari", "Bhandari", "haricoder@gmail.com");
+        StudentEntity tempStudent1 = new StudentEntity("Binod", "Bhandari", "binodcoder@gmail.com");
+        StudentEntity tempStudent2 = new StudentEntity("Ram", "Bhandari", "ramcoder@gmail.com");
+        StudentEntity tempStudent3 = new StudentEntity("Hari", "Bhandari", "haricoder@gmail.com");
         //save the student objects
         System.out.println("Saving the student...");
         studentDAO.save(tempStudent1);
@@ -102,7 +102,7 @@ public class MerokaamApplication {
     private void createStudent(StudentDAO studentDAO) {
         //create the student object
         System.out.println("Creating new student object ...");
-        Student tempStudent = new Student("Binod", "Bhandari", "binodcoder@gmail.com");
+        StudentEntity tempStudent = new StudentEntity("Binod", "Bhandari", "binodcoder@gmail.com");
         //save the student object
         System.out.println("Saving the student...");
         studentDAO.save(tempStudent);
