@@ -22,7 +22,9 @@ public class CustomerController {
     @PostMapping("/processCustomerForm")
     public String processForm(@Valid @ModelAttribute("customer") Customer theCustomer, BindingResult theBindingResult) {
         //  log the input data
-        System.out.println("theStudent: " + theCustomer.getFirstName() + " " + theCustomer.getLastName());
+        System.out.println("Last name: |" + theCustomer.getLastName()+"|");
+        System.out.println("Binding results: "+theBindingResult.toString());
+        System.out.println("\n\n\n\n");
         if (theBindingResult.hasErrors()) {
             return "customer-form";
         } else {
