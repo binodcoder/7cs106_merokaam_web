@@ -29,8 +29,6 @@ public class TestSecurityConfig {
         return jdbcUserDetailsManager;
     }
 
-
-
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsManager() {
 //        UserDetails john = User.builder().username("john").password("{noop}test123").roles("EMPLOYEE").build();
