@@ -22,13 +22,9 @@ public class JobPostActivityController {
     private final UsersService usersService;
     private final JobPostActivityService jobPostActivityService;
 
-
-
-
-    public JobPostActivityController(UsersService usersService, JobPostActivityService jobPostActivityService ) {
+    public JobPostActivityController(UsersService usersService, JobPostActivityService jobPostActivityService) {
         this.usersService = usersService;
-        this.jobPostActivityService=jobPostActivityService;
-
+        this.jobPostActivityService = jobPostActivityService;
     }
 
     @GetMapping("/dashboard/")
@@ -62,7 +58,7 @@ public class JobPostActivityController {
         }
         jobPostActivity.setPostedDate(new Date());
         model.addAttribute("jobPostActivity", jobPostActivity);
-      //  jobPostActivityService.addNew(jobPostActivity);
-        return "redirect:/dashboard";
+        //  jobPostActivityService.addNew(jobPostActivity);
+        return "redirect:/dashboard/";
     }
 }
