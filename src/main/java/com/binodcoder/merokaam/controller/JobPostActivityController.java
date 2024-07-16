@@ -36,7 +36,7 @@ public class JobPostActivityController {
         this.jobSeekerSaveService = jobSeekerSaveService;
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/dashboard/")
     public String searchJobs(Model model,
                              @RequestParam(value = "job", required = false) String job,
                              @RequestParam(value = "location", required = false) String location,
