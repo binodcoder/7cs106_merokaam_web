@@ -153,7 +153,7 @@ public class JobPostActivityController {
         }
         jobPostActivity.setPostedDate(new Date());
         model.addAttribute("jobPostActivity", jobPostActivity);
-        //  jobPostActivityService.addNew(jobPostActivity);
+        JobPostActivity saved=  jobPostActivityService.addNew(jobPostActivity);
         return "redirect:/dashboard/";
     }
 

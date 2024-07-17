@@ -4,8 +4,14 @@ import com.binodcoder.merokaam.entity.Skills;
 import com.binodcoder.merokaam.entity.Users;
 import com.binodcoder.merokaam.repository.UsersRepository;
 import com.binodcoder.merokaam.service.JobSeekerProfileService;
+import com.binodcoder.util.FileDownloadUtil;
 import com.binodcoder.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,10 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -94,5 +97,31 @@ public class JobSeekerProfileController {
             throw new RuntimeException(ex);
         }
         return "redirect:/dashboard/";
+    }
+
+    @GetMapping("/{id}")
+    public String candidateProfile(@PathVariable("id") int id, Model model) {
+        Optional<JobSeekerProfile> seekerProfile = jobSeekerProfileService.getOne(id);
+        model.addAttribute("profile", seekerProfile);
+        return "job-seeker-profile";
+    }
+
+    @GetMapping("/downloadResume")
+    public ResponseEntity<?> downloadResume(@RequestParam(value = "fileName") String fileName, @RequestParam(value = "userID") String userId) {
+        FileDownloadUtil fileDownloadUtil = new FileDownloadUtil();
+        Resource resource = null;
+        try {
+            resource = fileDownloadUtil.getFileAsResourse("photos/candidate/" + userId, fileName);
+        } catch (IOException io) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (resource == null) {
+            return new ResponseEntity<>("File not found", HttpStatus.NOT_FOUND);
+        }
+        String contentType = "application/octet-stream";
+        String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(resource);
     }
 }
