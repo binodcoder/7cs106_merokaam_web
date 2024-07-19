@@ -1,6 +1,5 @@
 package com.binodcoder.util;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -14,7 +13,7 @@ public class FileUploadUtil {
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
-        try (InputStream inputStream = multipartFile.getInputStream();) {
+        try (InputStream inputStream = multipartFile.getInputStream()) {
             Path path = uploadPath.resolve(filename);
             System.out.println("FilePath" + path);
             System.out.println("filename " + filename);
