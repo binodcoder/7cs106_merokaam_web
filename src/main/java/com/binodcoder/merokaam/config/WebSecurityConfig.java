@@ -11,10 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+//web security configuration file
 @Configuration
 public class WebSecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
+
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
     private final String[] publicUrl = {
             "/",
             "/global-search/**",
