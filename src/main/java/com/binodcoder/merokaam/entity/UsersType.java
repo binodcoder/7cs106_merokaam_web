@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="users_type")
+@Table(name = "users_type")
 public class UsersType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userTypeId;
+
     private String userTypeName;
 
     @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)

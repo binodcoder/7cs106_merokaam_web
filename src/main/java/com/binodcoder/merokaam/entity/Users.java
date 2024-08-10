@@ -10,7 +10,7 @@ import java.util.Date;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Integer userId;
     @Column(unique = true)
     private String email;
     @NotEmpty
@@ -25,7 +25,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
+    public Users(Integer userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -34,7 +34,7 @@ public class Users {
         this.userTypeId = userTypeId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
