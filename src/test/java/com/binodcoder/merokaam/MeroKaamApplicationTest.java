@@ -3,6 +3,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+// @DisplayNameGeneration(DisplayNameGenerator.IndicativeSentences.class)
+// @DisplayNameGeneration(DisplayNameGenerator.Simple.class)
 public class MeroKaamApplicationTest {
 
     MerokaamApplication merokaamApplication;
@@ -30,6 +33,7 @@ public class MeroKaamApplicationTest {
     }
 
     @Test
+    @DisplayName("Equals and Not Equals")
     void testEqualsAndNotEquals() {
         System.out.println("Running test: testEqualsAndNotEquals");
         assertEquals(6, merokaamApplication.sum(2, 4), "2+4 must be 6");
@@ -37,6 +41,7 @@ public class MeroKaamApplicationTest {
     }
 
     @Test
+    @DisplayName("Null and Not Null")
     void testNullAndNotNull() {
         System.out.println("Running test: testNullAndNotNull");
         String str1 = null;
