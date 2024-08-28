@@ -1,24 +1,47 @@
 package com.binodcoder.merokaam;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MeroKaamApplicationTest {
 
-    @Test
-    void testEqualsAndNotEquals() {
-        MerokaamApplication merokaamApplication = new MerokaamApplication();
-        assertEquals(6, merokaamApplication.sum(2, 4), "2+4 must be 6");
-        assertNotEquals(6, merokaamApplication.sum(1,9), "1+9 must not be 6" );
+    MerokaamApplication merokaamApplication;
+
+    @BeforeEach
+    void setUpBeforeEach() {
+        merokaamApplication = new MerokaamApplication();
+        System.out.println("@BeforeEach executes before the execution of each");
+    }
+
+    @AfterEach
+    void tearDownAfterEach() {
+        System.out.println("Running @AfterEach");
+        System.out.println();
+    }
+
+    @BeforeAll
+    static void setUpBeforeEachClass() {
+        System.out.println("@BeforeAll executes only once before all test methods execution in the class");
+    }
+
+    @AfterAll
+    static void tearDownAfterAll() {
+        System.out.println("@AfterAll executes only once after all test methods execution in the class");
     }
 
     @Test
-    void testNullAndNotNull(){
-        MerokaamApplication merokaamApplication=new MerokaamApplication();
-        String str1=null;
-        String str2="binodcoder";
+    void testEqualsAndNotEquals() {
+        System.out.println("Running test: testEqualsAndNotEquals");
+        assertEquals(6, merokaamApplication.sum(2, 4), "2+4 must be 6");
+        assertNotEquals(6, merokaamApplication.sum(1, 9), "1+9 must not be 6");
+    }
 
-        assertNull( merokaamApplication.checkNull(str1), "Object should be null");
+    @Test
+    void testNullAndNotNull() {
+        System.out.println("Running test: testNullAndNotNull");
+        String str1 = null;
+        String str2 = "binodcoder";
+        assertNull(merokaamApplication.checkNull(str1), "Object should be null");
         assertNotNull(merokaamApplication.checkNull(str2), "Object should not be null");
     }
 }
