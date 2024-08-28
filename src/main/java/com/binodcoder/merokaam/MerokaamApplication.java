@@ -7,4 +7,8 @@ public class MerokaamApplication {
     public static void main(String[] args) {
         SpringApplication.run(MerokaamApplication.class, args);
     }
+
+    public int sum(int a, int b) {
+        return a + b;
+    }
 }
