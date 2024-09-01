@@ -1,0 +1,482 @@
+@startuml
+interface com.binodcoder.merokaam.repository.JobSeekerApplyRepository {
+~ List<JobSeekerApply> findByUserId(JobSeekerProfile)
+~ List<JobSeekerApply> findByJob(JobPostActivity)
+}
+
+class com.binodcoder.merokaam.service.UsersTypeService {
+- UsersTypeRepository usersTypeRepository
++ List<UsersType> getAll()
+}
+
+
+class com.binodcoder.merokaam.config.WebSecurityConfig {
+- CustomUserDetailsService customUserDetailsService
+- CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler
+- String[] publicUrl
+# SecurityFilterChain securityFilterChain(HttpSecurity)
++ AuthenticationProvider authenticationProvider()
++ PasswordEncoder passwordEncoder()
+}
+
+
+class com.binodcoder.merokaam.entity.Users {
+- Integer userId
+- String email
+- String password
+- boolean isActive
+- Date registrationDate
+- UsersType userTypeId
++ Integer getUserId()
++ void setUserId(int)
++ String getEmail()
++ void setEmail(String)
++ String getPassword()
++ void setPassword(String)
++ boolean isActive()
++ void setActive(boolean)
++ Date getRegistrationDate()
++ void setRegistrationDate(Date)
++ UsersType getUserTypeId()
++ void setUserTypeId(UsersType)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.entity.JobSeekerProfile {
+- Integer userAccountId
+- Users userId
+- String firstName
+- String lastName
+- String city
+- String state
+- String country
+- String workAuthorization
+- String employmentType
+- String resume
+- String profilePhoto
+- List<Skills> skills
++ Integer getUserAccountId()
++ void setUserAccountId(Integer)
++ Users getUserId()
++ void setUserId(Users)
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getCity()
++ void setCity(String)
++ String getState()
++ void setState(String)
++ String getCountry()
++ void setCountry(String)
++ String getWorkAuthorization()
++ void setWorkAuthorization(String)
++ String getEmploymentType()
++ void setEmploymentType(String)
++ String getResume()
++ void setResume(String)
++ String getProfilePhoto()
++ void setProfilePhoto(String)
++ List<Skills> getSkills()
++ void setSkills(List<Skills>)
++ String getPhotosImagePath()
++ String toString()
+}
+
+
+interface com.binodcoder.merokaam.repository.JobSeekerProfileRepository {
+}
+class com.binodcoder.merokaam.controller.HomeController {
++ String home()
+}
+
+class com.binodcoder.merokaam.service.JobSeekerProfileService {
+- JobSeekerProfileRepository jobSeekerProfileRepository
+- UsersRepository usersRepository
++ Optional<JobSeekerProfile> getOne(Integer)
++ JobSeekerProfile addNew(JobSeekerProfile)
++ JobSeekerProfile getCurrentSeeekrProfile()
+}
+
+
+class com.binodcoder.merokaam.service.RecruiterProfileService {
+- RecruiterProfileRepository recruiterProfileRepository
+- UsersRepository usersRepository
++ Optional<RecruiterProfile> getOne(Integer)
++ RecruiterProfile addNew(RecruiterProfile)
++ RecruiterProfile getCurrentRecruiterProfile()
+}
+
+
+class com.binodcoder.merokaam.service.CustomUserDetailsService {
+- UsersRepository usersRepository
++ UserDetails loadUserByUsername(String)
+}
+
+
+class com.binodcoder.merokaam.controller.JobPostActivityController {
+- UsersService usersService
+- JobPostActivityService jobPostActivityService
+- JobSeekerApplyService jobSeekerApplyService
+- JobSeekerSaveService jobSeekerSaveService
++ String searchJobs(Model,String,String,String,String,String,String,String,String,boolean,boolean,boolean)
++ String addJobs(Model)
++ String addNew(JobPostActivity,Model)
++ String editJob(int,Model)
++ String globalSearch(Model,String,String,String,String,String,String,String,String,boolean,boolean,boolean)
+}
+
+
+class com.binodcoder.merokaam.service.JobSeekerApplyService {
+- JobSeekerApplyRepository jobSeekerApplyRepository
++ List<JobSeekerApply> getCandidatesJobs(JobSeekerProfile)
++ List<JobSeekerApply> getJobCandidates(JobPostActivity)
++ void addNew(JobSeekerApply)
+}
+
+
+class com.binodcoder.merokaam.entity.RecruiterJobsDto {
+- Long totalCandidates
+- Integer jobPostId
+- String jobTitle
+- JobLocation jobLocationId
+- JobCompany jobCompanyId
++ Long getTotalCandidates()
++ void setTotalCandidates(Long)
++ Integer getJobPostId()
++ void setJobPostId(Integer)
++ String getJobTitle()
++ void setJobTitle(String)
++ JobLocation getJobLocationId()
++ void setJobLocationId(JobLocation)
++ JobCompany getJobCompanyId()
++ void setJobCompanyId(JobCompany)
+}
+
+
+interface com.binodcoder.merokaam.repository.UsersRepository {
+~ Optional<Users> findByEmail(String)
+~ Boolean existsByEmail(String)
+}
+
+class com.binodcoder.merokaam.entity.JobCompany {
+- Integer Id
+- String name
+- String logo
++ Integer getId()
++ void setId(Integer)
++ String getName()
++ void setName(String)
++ String getLogo()
++ void setLogo(String)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.config.CustomAuthenticationSuccessHandler {
++ void onAuthenticationSuccess(HttpServletRequest,HttpServletResponse,Authentication)
+}
+
+interface com.binodcoder.merokaam.entity.IRecruiterJobs {
+~ Long getTotalCandidates()
+~ int getJob_post_id()
+~ String getJob_title()
+~ int getLocationId()
+~ String getCity()
+~ String getState()
+~ String getCountry()
+~ int getCompanyId()
+~ String getName()
+}
+
+class com.binodcoder.merokaam.controller.JobSeekerSaveController {
+- UsersService usersService
+- JobSeekerProfileService jobSeekerProfileService
+- JobPostActivityService jobPostActivityService
+- JobSeekerSaveService jobSeekerSaveService
++ String save(int,JobSeekerSave)
++ String savedJobs(Model)
+}
+
+
+class com.binodcoder.merokaam.controller.RecruiterProfileController {
+- UsersRepository usersRepository
+- RecruiterProfileService recruiterProfileService
++ String recruiterProfile(Model)
++ String addNew(RecruiterProfile,MultipartFile,Model)
+}
+
+
+class com.binodcoder.merokaam.entity.Skills {
+- Integer id
+- String name
+- String experienceLevel
+- String yearsOfExperience
+- JobSeekerProfile jobSeekerProfile
++ Integer getId()
++ void setId(Integer)
++ String getName()
++ void setName(String)
++ String getExperienceLevel()
++ void setExperienceLevel(String)
++ String getYearsOfExperience()
++ void setYearsOfExperience(String)
++ JobSeekerProfile getJobSeekerProfile()
++ void setJobSeekerProfile(JobSeekerProfile)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.service.UsersService {
+- UsersRepository usersRepository
+- JobSeekerProfileRepository jobSeekerProfileRepository
+- RecruiterProfileRepository recruiterProfileRepository
+- PasswordEncoder passwordEncoder
++ Users addNew(Users)
++ Optional<Users> getUserByEmail(String)
++ Object getCurrentUserProfile()
++ Users getCurrentUser()
++ Users findByEmail(String)
+}
+
+
+interface com.binodcoder.merokaam.repository.UsersTypeRepository {
+}
+class com.binodcoder.merokaam.controller.JobSeekerProfileController {
+- JobSeekerProfileService jobSeekerProfileService
+- UsersRepository usersRepository
++ String jobSeekerProfile(Model)
++ String addNew(JobSeekerProfile,MultipartFile,MultipartFile,Model)
++ String candidateProfile(int,Model)
++ ResponseEntity<?> downloadResume(String,String)
+}
+
+
+interface com.binodcoder.merokaam.repository.JobSeekerSaveRepository {
+~ List<JobSeekerSave> findByUserId(JobSeekerProfile)
+~ List<JobSeekerSave> findByJob(JobPostActivity)
+}
+
+class com.binodcoder.merokaam.MerokaamApplication {
++ {static} void main(String[])
++ int sum(int,int)
++ Object checkNull(Object)
+}
+
+class com.binodcoder.merokaam.config.MvcConfig {
+- {static} String UPLOAD_DIR
++ void addResourceHandlers(ResourceHandlerRegistry)
+- void exposeDirectory(String,ResourceHandlerRegistry)
+}
+
+
+class com.binodcoder.merokaam.entity.JobSeekerApply {
+- Integer id
+- JobSeekerProfile userId
+- JobPostActivity job
+- Date applyDate
+- String coverLetter
++ Integer getId()
++ void setId(Integer)
++ JobSeekerProfile getUserId()
++ void setUserId(JobSeekerProfile)
++ JobPostActivity getJob()
++ void setJob(JobPostActivity)
++ Date getApplyDate()
++ void setApplyDate(Date)
++ String getCoverLetter()
++ void setCoverLetter(String)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.entity.JobSeekerSave {
+- Integer id
+- JobSeekerProfile userId
+- JobPostActivity job
++ Integer getId()
++ void setId(Integer)
++ JobSeekerProfile getUserId()
++ void setUserId(JobSeekerProfile)
++ JobPostActivity getJob()
++ void setJob(JobPostActivity)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.controller.JobSeekerApplyController {
+- JobPostActivityService jobPostActivityService
+- UsersService usersService
+- JobSeekerApplyService jobSeekerApplyService
+- JobSeekerSaveService jobSeekerSaveService
+- RecruiterProfileService recruiterProfileService
+- JobSeekerProfileService jobSeekerProfileService
++ String display(int,Model)
++ String apply(int,JobSeekerApply)
+}
+
+
+interface com.binodcoder.merokaam.repository.RecruiterProfileRepository {
+}
+class com.binodcoder.merokaam.service.JobPostActivityService {
+- JobPostActivityRepository jobPostActivityRepository
++ JobPostActivity addNew(JobPostActivity)
++ List<RecruiterJobsDto> getRecruiterJobs(int)
++ JobPostActivity getOne(int)
++ List<JobPostActivity> getAll()
++ List<JobPostActivity> search(String,String,List<String>,List<String>,LocalDate)
+}
+
+
+class com.binodcoder.merokaam.entity.JobLocation {
+- Integer Id
+- String city
+- String state
+- String country
++ Integer getId()
++ void setId(Integer)
++ String getCity()
++ void setCity(String)
++ String getState()
++ void setState(String)
++ String getCountry()
++ void setCountry(String)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.entity.RecruiterProfile {
+- int userAccountId
+- Users userId
+- String firstName
+- String lastName
+- String city
+- String state
+- String country
+- String company
+- String profilePhoto
++ int getUserAccountId()
++ void setUserAccountId(int)
++ Users getUserId()
++ void setUserId(Users)
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getCity()
++ void setCity(String)
++ String getState()
++ void setState(String)
++ String getCountry()
++ void setCountry(String)
++ String getCompany()
++ void setCompany(String)
++ String getProfilePhoto()
++ void setProfilePhoto(String)
++ String getPhotosImagePath()
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.DemoUtils {
+- String academy
+- String academyDuplicate
++ String getAcademy()
++ String getAcademyDuplicate()
++ Boolean isGreater(int,int)
+}
+
+
+class com.binodcoder.merokaam.service.JobSeekerSaveService {
+- JobSeekerSaveRepository jobSeekerSaveRepository
++ List<JobSeekerSave> getCandidatesJob(JobSeekerProfile)
++ List<JobSeekerSave> getJobCandidates(JobPostActivity)
++ void addNew(JobSeekerSave)
+}
+
+
+interface com.binodcoder.merokaam.repository.JobPostActivityRepository {
+~ List<IRecruiterJobs> getRecruiterJobs(int)
+~ List<JobPostActivity> searchWithoutDate(String,String,List<String>,List<String>)
+~ List<JobPostActivity> search(String,String,List<String>,List<String>,LocalDate)
+}
+
+class com.binodcoder.merokaam.entity.UsersType {
+- int userTypeId
+- String userTypeName
+- List<Users> users
++ int getUserTypeId()
++ void setUserTypeId(int)
++ String getUserTypeName()
++ void setUserTypeName(String)
++ List<Users> getUsers()
++ void setUsers(List<Users>)
++ String toString()
+}
+
+
+class com.binodcoder.merokaam.controller.UsersController {
+- UsersTypeService usersTypeService
+- UsersService usersService
++ String register(Model)
++ String userRegistration(Users,Model)
++ String login()
++ String logout(HttpServletRequest,HttpServletResponse)
+}
+
+
+class com.binodcoder.merokaam.entity.JobPostActivity {
+- Integer jobPostId
+- Users postedById
+- JobLocation jobLocationId
+- JobCompany jobCompanyId
+- Boolean isActive
+- Boolean isSaved
+- String descriptionOfJob
+- String jobType
+- String salary
+- String remote
+- Date postedDate
+- String jobTitle
++ Integer getJobPostId()
++ void setJobPostId(Integer)
++ Users getPostedById()
++ void setPostedById(Users)
++ JobLocation getJobLocationId()
++ void setJobLocationId(JobLocation)
++ JobCompany getJobCompanyId()
++ void setJobCompanyId(JobCompany)
++ Boolean getIsActive()
++ void setIsActive(Boolean)
++ Boolean getIsSaved()
++ void setIsSaved(Boolean)
++ String getDescriptionOfJob()
++ void setDescriptionOfJob(String)
++ String getJobType()
++ void setJobType(String)
++ String getSalary()
++ void setSalary(String)
++ String getRemote()
++ void setRemote(String)
++ Date getPostedDate()
++ void setPostedDate(Date)
++ String getJobTitle()
++ void setJobTitle(String)
++ String toString()
+}
+
+
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.JobSeekerApplyRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.JobSeekerProfileRepository
+org.springframework.security.core.userdetails.UserDetailsService <|.. com.binodcoder.merokaam.service.CustomUserDetailsService
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.UsersRepository
+org.springframework.security.web.authentication.AuthenticationSuccessHandler <|.. com.binodcoder.merokaam.config.CustomAuthenticationSuccessHandler
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.UsersTypeRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.JobSeekerSaveRepository
+org.springframework.web.servlet.config.annotation.WebMvcConfigurer <|.. com.binodcoder.merokaam.config.MvcConfig
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.RecruiterProfileRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.binodcoder.merokaam.repository.JobPostActivityRepository
+@enduml
